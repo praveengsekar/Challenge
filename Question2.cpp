@@ -82,6 +82,7 @@ bool is_inside_triangle(std::vector<std::vector<float>> &triangle, std::vector<s
 {    
     bool is_inside = false;
     std::vector<std::vector<float>> points;
+    std::vector<float> length_list;
 
     //boundbox for the triangle
     float min_y = triangle[0][1];
@@ -124,13 +125,26 @@ bool is_inside_triangle(std::vector<std::vector<float>> &triangle, std::vector<s
                         if  (det < 0) 
                         {
                             std::vector<float> ans = intersection(triangle[0], triangle[1], triangle[2], building[i][j] );
-                            length += distance(triangle[0][0], triangle[0][1],  ans[0],  ans[1]);
+                            length_list.push_back(distance(triangle[0][0], triangle[0][1],  ans[0],  ans[1]));
                         }
                     }
                 }
             }
         }
     }
+
+    //updating the minimum length to the lenth exposed variable
+    if (length_list.size())
+    {
+        float min_length = length_list[0];
+        for (auto i = length_list.begin(); i != length_list.end(); ++i) 
+        {
+            if (min_length > *i)
+                min_length = *i;
+        }
+        length += min_length;
+    }
+    
     return is_inside;
 }
 
