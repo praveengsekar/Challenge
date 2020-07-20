@@ -11,7 +11,7 @@ std::vector<float> intersection(std::vector<float> A, std::vector<float> B, std:
     // Line AB represented as ax + by = c
     double a = B[1] - A[1];
     double b = A[0] - B[0];
-    double c = a*(A[0]) + b*(A[0]);
+    double c = a*(A[0]) + b*(A[1]);
     // Line CD represented as a1x + b1y = c1
     double a1 = D[1] - C[1];
     double b1 = C[0] - D[0];
